@@ -1,0 +1,41 @@
+void countingSort(int *arr, int tam)
+{
+	int max_e = max_element(arr,tam);
+	int *new_array= new int[max_e+1];
+	ceros_array(new_array,max_e);
+	int *pointer_arr=arr;
+	int *pointer_new_array=new_array;
+	int aux;
+	while (pointer_new_array < new_array +max_e+1) {
+		while(pointer_arr<arr+tam){
+			if((*pointer_arr)==(pointer_new_array-new_array)){
+				(*pointer_new_array)++;
+			}
+			pointer_arr++;
+		}
+		pointer_arr=arr;
+		aux=*pointer_new_array;
+		pointer_new_array++;
+		*pointer_new_array=aux;
+	}
+	pointer_new_array=new_array+max_e;
+	pointer_arr=arr+tam-1;
+	while(pointer_new_array>new_array){
+		if((pointer_new_array)!=(pointer_new_array-1)){
+			*pointer_arr=(pointer_new_array-new_array);
+			(*pointer_new_array)--;
+			pointer_arr--;
+			
+		}
+		else{
+			pointer_new_array--;
+		}
+		
+	}
+	while(*pointer_new_array!=0){
+		*pointer_arr=(pointer_new_array-new_array);
+		(*pointer_new_array)--;
+		pointer_arr--;
+	}
+	return;
+}
